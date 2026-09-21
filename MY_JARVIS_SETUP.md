@@ -1,11 +1,10 @@
-# 🤖 My Jarvis AI Assistant Setup
+# 🤖 My Jarvis AI Assistant
 
-This repository contains my customized implementation and configuration of
-Jarvis, a locally running AI desktop assistant.
+A customized local/hybrid AI desktop assistant built on the open-source
+Jarvis project.
 
-The objective of this project is to explore how local LLMs, speech AI,
-vision models, cloud LLMs, and desktop automation can be orchestrated into
-a practical AI assistant.
+My objective with this project is to experiment hands-on with local LLMs,
+Voice AI, Vision AI, model routing, and desktop AI automation.
 
 ## Architecture
 
@@ -14,43 +13,38 @@ User Voice
 Wake Word Detection
     ↓
 Speech-to-Text
+    ↓
 Faster-Whisper (base.en)
     ↓
-Intent / Request Processing
-    ↓
 AI Orchestration
-    ├── Local LLM: Ollama
-    │      └── Qwen 2.5 7B Instruct
-    │
-    ├── Advanced Planning
-    │      └── Groq / Llama 3.3 70B
-    │
-    └── Vision
-           └── LLaVA 7B
+    ├── Local LLM → Ollama / Qwen 2.5 7B Instruct
+    ├── Advanced Planner → Groq / Llama 3.3 70B
+    └── Vision → LLaVA 7B
     ↓
 Tools / Local Actions
     ↓
-Response Generation
+Response
     ↓
 Text-to-Speech
     ↓
 Desktop UI
 
-## 🧠 AI Stack
+## AI Stack
 
-| Component | Technology | Purpose |
+| Component | Technology | Role |
 |---|---|---|
-| Local LLM | Ollama + Qwen 2.5 7B Instruct | Local conversational AI and request processing |
-| Advanced Planner | Groq / Llama 3.3 70B | Complex planning and reasoning |
-| Vision | LLaVA 7B | Vision-language processing |
-| Speech-to-Text | Faster-Whisper `base.en` | Converts voice input into text |
-| Text-to-Speech | Local TTS | Voice responses |
-| Desktop Application | Python / PySide6 | Jarvis desktop interface |
-| Packaging | PyInstaller | Windows application packaging |
+| Local LLM | Ollama + Qwen 2.5 7B | Local conversational AI |
+| Planner | Groq / Llama 3.3 70B | Advanced planning |
+| Vision | LLaVA 7B | Visual understanding |
+| Speech-to-Text | Faster-Whisper base.en | Voice transcription |
+| Desktop UI | Python / PySide6 | Desktop interface |
+| Packaging | PyInstaller | Windows executable |
 
-## 🔊 Speech-to-Text Enhancement
+## My Customizations
 
-The default STT configuration was updated from:
+### Speech Recognition
+
+Updated the default Faster-Whisper model from:
 
 `tiny.en`
 
@@ -58,92 +52,72 @@ to:
 
 `base.en`
 
-The goal is to improve English speech-recognition accuracy while retaining
-local inference.
+to improve English speech-recognition accuracy.
 
-## 🏠 Local-First AI
+### Local LLM
 
-The primary conversational model runs locally through Ollama using:
+Configured Jarvis to use:
 
 `qwen2.5:7b-instruct`
 
-This allows the assistant to perform many AI interactions locally rather
-than requiring every request to be sent to an external LLM service.
+through Ollama for local inference.
 
-## 🧩 Hybrid AI Architecture
+### Vision
 
-Jarvis uses a hybrid architecture.
+Configured:
 
-Local models handle suitable everyday interactions, while specialized
-models/services can be used for more demanding tasks.
+`llava:7b`
 
-This creates a practical balance between:
+for vision-language capabilities.
 
+### Advanced Planning
+
+Configured a Groq-hosted Llama model for more demanding planning tasks,
+creating a hybrid local/cloud AI architecture.
+
+## Architecture Principles
+
+The setup explores a hybrid AI architecture where different models can be
+used according to the workload.
+
+Key considerations include:
+
+- Local-first processing
 - Privacy
 - Latency
-- AI capability
 - Cost
-- Offline/local processing
+- Model specialization
+- Offline capability
+- Cloud escalation for complex workloads
 
-## 👁️ Vision
+## What I Learned
 
-LLaVA 7B is configured as the vision-language model for requests requiring
-visual understanding.
+Through this project I gained hands-on experience with:
 
-## 🧠 Advanced Planning
-
-For more complex planning workloads, the setup supports:
-
-`Groq / Llama 3.3 70B`
-
-This separates everyday local inference from more computationally demanding
-reasoning tasks.
-
-## 🔐 Security
-
-Runtime configuration and credentials are intentionally kept outside the
-Git repository.
-
-The following should never be committed:
-
-- API keys
-- Access tokens
-- `.env` files containing secrets
-- Local application configuration containing credentials
-- User-specific data
-
-Only safe source code and documentation are maintained in the public
-repository.
-
-## 🎯 What I Learned
-
-This project provided hands-on experience with:
-
-- Local LLM deployment
-- Ollama model management
-- Voice AI
-- Speech-to-text pipelines
+- Local LLM deployment using Ollama
+- LLM model configuration and routing
+- Voice AI and speech-to-text
 - Vision-language models
 - Hybrid local/cloud AI architecture
-- AI model routing
-- Desktop AI applications
-- Python application packaging
-- Git/GitHub version control
+- Python desktop AI applications
+- PyInstaller application packaging
+- Git and GitHub version control
 
-## 🚀 Next Steps
+## Next Steps
 
-Potential future enhancements include:
+Planned areas of experimentation:
 
 - Agentic task execution
 - Long-term memory
 - RAG-based personal knowledge
-- Calendar and email integration
 - Browser automation
-- Improved tool routing
+- Email and calendar integration
+- Improved model routing
 - Multi-agent orchestration
-- Additional privacy and security controls
 
----
+## Credits
 
-This repository is based on the original Jarvis open-source project and
-contains my own configuration, experimentation, and enhancements.
+This project is based on the original open-source Jarvis project.
+
+This fork documents my own configuration, experimentation, and enhancements
+while preserving attribution to the original project.
