@@ -6,6 +6,38 @@ Technical details: `SPEC.md` · Build notes: `BUILD.md`
 
 ---
 
+## My Jarvis Customization
+
+This fork is my hands-on implementation and experimentation with a
+local/hybrid AI desktop assistant.
+
+My current setup combines:
+
+- **Local LLM:** Ollama + Qwen 2.5 7B Instruct
+- **Speech-to-Text:** Faster-Whisper `base.en`
+- **Vision AI:** LLaVA 7B
+- **Advanced Planning:** Groq / Llama 3.3 70B
+- **Desktop UI:** Python + PySide6
+- **Windows Packaging:** PyInstaller
+
+### What I Changed
+
+I updated the default speech-to-text model from `tiny.en` to `base.en`
+and configured the assistant to experiment with local and cloud AI models
+for different workloads.
+
+The project is being used to explore local LLM deployment, Voice AI,
+Vision AI, model routing, hybrid AI architecture, agentic capabilities,
+and desktop automation.
+
+[View my customized Jarvis architecture and setup](MY_JARVIS_SETUP.md)
+
+> This repository is based on the original open-source Jarvis project.
+> The section above documents my own configuration, experimentation,
+> and modifications.
+
+---
+
 ## What Jarvis can do
 
 Everything below runs on your PC. Anything that reaches the internet is called out explicitly under [Security & privacy model](#security--privacy-model).
