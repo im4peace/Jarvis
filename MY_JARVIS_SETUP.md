@@ -1,12 +1,19 @@
 # 🤖 My Jarvis AI Assistant
 
-A customized local/hybrid AI desktop assistant built on the open-source
-Jarvis project.
+My configuration and experiments with a fork of the [original Jarvis project](https://github.com/ndunl075/Jarvis). The original project provides the core voice assistant and desktop features.
 
 My objective with this project is to experiment hands-on with local LLMs,
 Voice AI, Vision AI, model routing, and desktop AI automation.
 
+## What I changed
+
+I changed the default Faster-Whisper speech-to-text model in the fork from `tiny.en` to `base.en`. The Ollama, vision, and optional Groq models listed below describe my configuration and experiments; they are not separate code features I developed.
+
+The `qwen2.5:7b-instruct` model requires enough free memory to load. Listing a model does not mean I successfully ran every combination on my PC.
+
 ## Architecture
+
+The following flow is a conceptual overview. The cloud planner is optional and requires an internet connection and provider credentials.
 
 User Voice
     ↓
@@ -52,7 +59,7 @@ to:
 
 `base.en`
 
-to improve English speech-recognition accuracy.
+as an experiment with a larger English speech-recognition model. It can use more resources than `tiny.en`.
 
 ### Local LLM
 
@@ -72,8 +79,7 @@ for vision-language capabilities.
 
 ### Advanced Planning
 
-Configured a Groq-hosted Llama model for more demanding planning tasks,
-creating a hybrid local/cloud AI architecture.
+Configured an optional Groq-hosted Llama model for planning experiments. When enabled, this component sends requests to a cloud provider and requires a working internet connection.
 
 ## Architecture Principles
 
@@ -117,7 +123,4 @@ Planned areas of experimentation:
 
 ## Credits
 
-This project is based on the original open-source Jarvis project.
-
-This fork documents my own configuration, experimentation, and enhancements
-while preserving attribution to the original project.
+This fork is based on the [original open-source Jarvis project by ndunl075](https://github.com/ndunl075/Jarvis). The original project provides the core application. My code change and setup experiments are described above.

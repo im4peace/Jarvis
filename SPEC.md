@@ -1,5 +1,7 @@
 # Jarvis Technical Spec
 
+> **Original project document.** This specification comes from the upstream Jarvis project and records its design goals. Some statements describe the intended design rather than the current behavior of this fork. See [README.md](README.md) and [MY_JARVIS_SETUP.md](MY_JARVIS_SETUP.md) for my changes and optional cloud configuration.
+
 This is the contract. BUILD.md references this document by section. Do not deviate without explicit approval.
 
 ## Product summary

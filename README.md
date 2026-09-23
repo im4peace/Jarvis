@@ -1,44 +1,41 @@
 # Jarvis
 
-A fully local, no-subscription AI voice assistant for Windows. Wake word, speech-to-text, Ollama LLM, and tools — all on your PC.
+Jarvis is a Windows AI voice assistant based on the [original open-source Jarvis project](https://github.com/ndunl075/Jarvis). It supports on-device speech recognition, voice responses, an Ollama language model, and desktop tools. Web research and optional cloud features use internet services.
 
-Technical details: `SPEC.md` · Build notes: `BUILD.md`
+This repository is my fork for experimenting with local and hybrid AI assistants. The original project provides the core application and most of the capabilities described below.
 
----
+## My contribution
 
-## My Jarvis Customization
+- Changed the default Faster-Whisper speech-to-text model from `tiny.en` to `base.en`.
+- Documented my Windows setup and experiments with Ollama, vision models, and an optional Groq planner in [MY_JARVIS_SETUP.md](MY_JARVIS_SETUP.md).
 
-This fork is my hands-on implementation and experimentation with a
-local/hybrid AI desktop assistant.
+Changing a setting on my PC is a configuration choice, not a change to the application code. Features below are inherited from the original project unless specifically identified as changes in this fork.
 
-My current setup combines:
+## My experimental setup
 
-- **Local LLM:** Ollama + Qwen 2.5 7B Instruct
-- **Speech-to-Text:** Faster-Whisper `base.en`
-- **Vision AI:** LLaVA 7B
-- **Advanced Planning:** Groq / Llama 3.3 70B
-- **Desktop UI:** Python + PySide6
-- **Windows Packaging:** PyInstaller
+| Component | Configuration |
+| --- | --- |
+| Speech recognition | Faster-Whisper `base.en` |
+| Local language model | Ollama with `qwen2.5:7b-instruct` |
+| Vision model | `llava:7b` |
+| Optional cloud planner | Groq with Llama 3.3 70B |
+| Desktop application | Python and PySide6 |
+| Windows packaging | PyInstaller |
 
-### What I Changed
+These are setup choices and experiments, not a claim that every combination has run successfully on my PC. In particular, `qwen2.5:7b-instruct` requires sufficient free memory to load.
 
-I updated the default speech-to-text model from `tiny.en` to `base.en`
-and configured the assistant to experiment with local and cloud AI models
-for different workloads.
+## Project status
 
-The project is being used to explore local LLM deployment, Voice AI,
-Vision AI, model routing, hybrid AI architecture, agentic capabilities,
-and desktop automation.
+This is an experimental fork. I am documenting setup issues and exploring how the voice, vision, model, and desktop components work together. No release built and verified from this fork is currently advertised here.
 
-[View my customized Jarvis architecture and setup](MY_JARVIS_SETUP.md)
-
-> This repository is based on the original open-source Jarvis project.
-> The section above documents my own configuration, experimentation,
-> and modifications.
+Original project specification: [SPEC.md](SPEC.md) · Original project build plan: [BUILD.md](BUILD.md) · My setup: [MY_JARVIS_SETUP.md](MY_JARVIS_SETUP.md)
 
 ---
 
-## What Jarvis can do
+## Features of the original project
+
+The features below are documented by the original project. Their inclusion here does not mean I developed them or verified all of them on my own PC.
+
 
 Everything below runs on your PC. Anything that reaches the internet is called out explicitly under [Security & privacy model](#security--privacy-model).
 
@@ -123,28 +120,11 @@ Everything below runs on your PC. Anything that reaches the internet is called o
 
 ---
 
-## Download (Windows)
+## Getting started
 
-**[Download Jarvis for Windows (zip)](https://github.com/ndunl075/Jarvis/releases/latest/download/Jarvis-0.0.1-windows-x64.zip)**
+This fork does not currently offer a verified Windows release download. To run the code in this repository, follow [Development](#development) below. To build a Windows zip yourself, follow [Build from source](#build-from-source).
 
-That link works after you [publish a GitHub Release](#publishing-a-download-on-github) with a zip asset named exactly `Jarvis-0.0.1-windows-x64.zip`. Until the first release exists, use the [Releases](https://github.com/ndunl075/Jarvis/releases) page instead.
-
-### Quick start
-
-1. **Install [Ollama](https://ollama.com/download)** (the LLM is not bundled).
-2. Pull the default model (or your choice in Settings later):
-   ```text
-   ollama pull qwen2.5:7b-instruct
-   ```
-3. **Download and extract the full zip** to a folder, e.g. `C:\Program Files\Jarvis`.
-   - You must keep `Jarvis.exe`, `models\`, and `voices\` in the same folder.
-   - Do not run a lone copied `.exe` without the rest of the folder.
-4. Run **`Jarvis.exe`** from that folder.
-5. Say **“Hey Jarvis”**. Use headphones for best wake-word / barge-in behavior.
-
-**SmartScreen:** unsigned builds may show a warning → **More info → Run anyway**.
-
-**Logs:** `%APPDATA%\Jarvis\logs\jarvis.log`
+The [original project's releases](https://github.com/ndunl075/Jarvis/releases) are provided by the original author and may not include changes in this fork.
 
 ---
 
@@ -172,65 +152,7 @@ Jarvis runs on CPU by default. A GPU helps Ollama respond faster but is not requ
 
 **Faster on weak PCs:** `ollama pull qwen2.5:3b-instruct` (or another small model) and set it under **Settings → Models**.
 
-**Slower STT, less CPU:** Settings → Models → Whisper `tiny.en`.
-
----
-
-## Publishing a download on GitHub
-
-This is how you get the **“click link → browser downloads zip”** behavior.
-
-### One-time: build the zip
-
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-pip install -e ".[dev]"
-.\build.ps1
-```
-
-Upload this file (name must match the version in `pyproject.toml`):
-
-```text
-dist\Jarvis-0.0.1-windows-x64.zip
-```
-
-### Create the release (GitHub website)
-
-1. Open **https://github.com/ndunl075/Jarvis/releases**
-2. Click **Draft a new release** (or **Create a new release**).
-3. **Choose a tag**, e.g. `v0.0.1` (create the tag if it does not exist).
-4. **Release title:** e.g. `Jarvis 0.0.1 (Windows)`
-5. **Description:** short notes (what’s included, need Ollama, extract full folder).
-6. Under **Attach binaries**, drag **`Jarvis-0.0.1-windows-x64.zip`** onto the page.
-7. Click **Publish release**.
-
-### Direct download link (for README / sharing)
-
-After publish, this URL downloads the zip (replace version if you bump `pyproject.toml`):
-
-```text
-https://github.com/ndunl075/Jarvis/releases/latest/download/Jarvis-0.0.1-windows-x64.zip
-```
-
-- `releases/latest` always points at the newest release.
-- The filename after `/download/` must **exactly** match the uploaded asset name.
-
-Optional: pin a specific version:
-
-```text
-https://github.com/ndunl075/Jarvis/releases/download/v0.0.1/Jarvis-0.0.1-windows-x64.zip
-```
-
-### CLI (optional)
-
-With [GitHub CLI](https://cli.github.com/) installed and authenticated:
-
-```powershell
-gh release create v0.0.1 dist\Jarvis-0.0.1-windows-x64.zip `
-  --title "Jarvis 0.0.1 (Windows)" `
-  --notes "Windows x64 portable zip. Requires Ollama. Extract full folder before running Jarvis.exe."
-```
+**Lower speech-recognition resource usage:** Select `tiny.en` under Settings → Models → Whisper. It may be less accurate than `base.en`.
 
 ---
 
@@ -356,6 +278,8 @@ Skip/Finish at any point. The walkthrough remembers your decision in `general.fi
 
 ## Security & privacy model
 
+The details below describe the original project. Verify how a feature behaves in your own configuration before relying on it.
+
 Jarvis is designed to run locally; understand the boundaries before you trust it with sensitive workflows.
 
 ### What stays local
@@ -395,3 +319,7 @@ The voice-control tools (`open_app`, `open_url`, `launch_steam_game`, etc.) can 
 ### Reporting a security issue
 
 If you find a vulnerability, please open a private security advisory on GitHub rather than filing a public issue.
+
+## Credits
+
+This fork is based on the [original Jarvis project by ndunl075](https://github.com/ndunl075/Jarvis). See its repository for the original source, history, and licensing. My changes and setup experiments are described above.

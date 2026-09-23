@@ -1,5 +1,7 @@
 # Jarvis Build Plan
 
+> **Original project document.** This is the upstream development plan, not a report that I implemented or verified each phase in this fork. Build outputs and release availability should be checked against the current repository and [README.md](README.md).
+
 This file is the entry point for Claude Code. Read this first, then read `SPEC.md` before writing any code. Do not skip phases. Do not write code for a later phase before the current phase is complete and verified.
 
 ## What you are building
